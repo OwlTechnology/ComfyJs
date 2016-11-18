@@ -56,7 +56,3 @@
         })
     };
 })(window);
-
-function $http(){
-
-}
