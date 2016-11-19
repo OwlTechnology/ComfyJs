@@ -45,3 +45,14 @@ $http({
     console.log(response);
   }
 });
+
+$http({
+  method: "DELETE",
+  url: "http://jsonplaceholder.typicode.com/posts/1",
+  success: function(response){
+    document.querySelector("#deleteResults").innerHTML = response;
+  },
+  error: function(response){
+    console.log(response);
+  }
+});
