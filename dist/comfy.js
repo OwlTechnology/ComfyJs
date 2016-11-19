@@ -2,7 +2,7 @@
 
     /*###### Controller for handling requests ######*/
     function HttpController() {
-      this.methods = ['GET', 'SET', 'PUT', 'DELETE', 'JSONP'];
+      this.methods = ['GET', 'PUT', 'POST', 'DELETE', 'JSONP'];
     }
 
 
@@ -13,7 +13,7 @@
 
         xmlHttp.onreadystatechange = function() {
 
-            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+            if (xmlHttp.readyState == 4 && (xmlHttp.status == 200 || xmlHttp.status == 201)) {
 
               if(successCallback != null)
                 successCallback(xmlHttp.responseText);
@@ -30,6 +30,8 @@
         xmlHttp.send(data);
 
     }
+
+
 
     /* ###### Validate config values and warn user if something is malformated ####### */
     HttpController.prototype.validate = function(method, url, data, successCallback, errorCallback){

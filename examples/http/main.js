@@ -5,5 +5,25 @@ $http({
   success: function(response){
     document.querySelector("#getResults").innerHTML = response;
   },
-  error: "hotdog"
+  error: function(response){
+    console.log(response);
+  }
+});
+
+
+
+$http({
+  method: "POST",
+  url: "http://jsonplaceholder.typicode.com/posts",
+  data: {
+    title: 'foo',
+    body: 'bar',
+    userId: 1
+  },
+  success: function(response){
+    document.querySelector("#postResults").innerHTML = response;
+  },
+  error: function(response){
+    console.log(response);
+  }
 });
