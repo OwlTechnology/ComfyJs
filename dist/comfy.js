@@ -6,19 +6,18 @@
     }
 
 
-
-    /*###### 'GET' Method #####*/
-    HttpController.prototype.get = function (url, successCallback, errorCallback) {
+    /* ##### Make our Ajax request ####*/
+    HttpController.prototype.xmlHttp = function (method, url, data, successCallback, errorCallback) {
       var xmlHttp = new XMLHttpRequest();
           xmlHttp.onreadystatechange = function() {
                 if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
                   successCallback(xmlHttp.responseText);
-                }else{
+                }else if(xmlHttp.readyState == 4 && xmlHttp.status != 200){
                   errorCallback(xmlHttp)
                 }
           }
-          xmlHttp.open("GET", url, true); // true for asynchronous
-          xmlHttp.send(null);
+          xmlHttp.open(method, url, true); // true for asynchronous
+          xmlHttp.send(data); 
     }
 
 
@@ -28,11 +27,9 @@
 
     window.$http = function(config){
 
-      config.method = config.method.toLowerCase();
+      config.method = config.method.toUpperCase();
 
-      if(config.method == 'get'){
-        _controller.get(config.url, config.success, config.error);
-      }
+        _controller.xmlHttp(config.method, config.url, config.data, config.success, config.error);
 
 
     };
