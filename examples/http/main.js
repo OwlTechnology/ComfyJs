@@ -27,3 +27,21 @@ $http({
     console.log(response);
   }
 });
+
+
+$http({
+  method: "PUT",
+  url: "http://jsonplaceholder.typicode.com/posts/1",
+  data: {
+    id: 1,
+    title: 'foo',
+    body: 'bar',
+    userId: 1
+  },
+  success: function(response){
+    document.querySelector("#putResults").innerHTML = response;
+  },
+  error: function(response){
+    console.log(response);
+  }
+});
