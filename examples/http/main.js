@@ -5,7 +5,5 @@ $http({
   success: function(response){
     document.querySelector("#getResults").innerHTML = response;
   },
-  error: function(response){
-    console.log(response);
-  }
+  error: "hotdog"
 });
