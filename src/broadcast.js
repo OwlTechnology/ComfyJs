@@ -20,16 +20,17 @@
         this.notifyListenerGroup(data.name, data.payload);
 
         if(data.propagate){
-            splitName = data.name.split(/./);
+            splitName = data.name.split(".");
+            constructName = "";
 
             for(x = splitName.length - 2; x >= 0; x -= 1){
                 constructName = "";
 
-                for(y = 0; y < x; y++){
-                    constructName += splitName[y] + (y == x - 1) ? "": ".";
+                for(y = 0; y <= x; y++){
+                    constructName += splitName[y] + ((y >= x - 1) ? "" : ".");
                 }
 
-                console.log(constructName);
+                this.notifyListenerGroup(constructName, data);
             }
         }
     };
@@ -38,7 +39,7 @@
         var x, listener, listeners = this.listeners[name];
 
         if(listeners){
-            for(x = 0; x < listeners[x]; x++){
+            for(x = 0; x < listeners.length; x++){
                 listener = listeners[x];
 
                 listener(payload);
@@ -54,5 +55,9 @@
             payload: payload,
             propagate: true
         })
+    };
+
+    window.$on = function(name, callback){
+        _controller.registerListener(name, callback);
     };
 })(window);

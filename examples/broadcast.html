@@ -5,8 +5,55 @@
         <title>Broadcast Examples</title>
 
         <script type="text/javascript" src="../dist/comfy.min.js"></script>
+
+        <style>
+            .output{
+                font-family: monospace;
+            }
+        </style>
     </head>
     <body>
-        Word
+        <div>
+            <button type="button" onclick="fooBarButtonClick()">
+                Broadcast: <code>foo.bar</code>
+            </button>
+            <button type="button" onclick="fooBazButtonClick()">
+                Broadcast: <code>foo.baz</code>
+            </button>
+            <button type="button" onclick="fooButtonClick()">
+                Broadcast: <code>foo</code>
+            </button>
+        </div>
+        <div id="output" class="output"></div>
+
+        <script type='text/javascript'>
+            var target = document.getElementById("output");
+
+            // Button actions
+            function fooBarButtonClick(){
+                $broadcast("foo.bar", {msg: "foo.bar broadcasted!"});
+            }
+
+            function fooBazButtonClick(){
+                $broadcast("foo.baz", {msg: "foo.baz broadcasted!"});
+            }
+
+            function fooButtonClick(){
+                $broadcast("foo", {msg: "foo broadcasted!"});
+            }
+
+            // Listeners
+            $on("foo", function(){
+                target.innerHTML += "foo listener triggered<br />";
+            });
+
+            $on("foo.bar", function(){
+                target.innerHTML += "foo.bar listener triggered<br />";
+            });
+
+            $on("foo.baz", function(){
+                target.innerHTML += "foo.baz listener triggered<br />";
+            });
+        </script>
     </body>
 </html>
